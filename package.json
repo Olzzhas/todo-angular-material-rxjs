@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "scss": "node-sass --watch scss -o css"
+    "scss": "node-sass --watch scss -o css",
+    "serve:ssr:todo-angularmaterial-rxjs": "node dist/todo-angularmaterial-rxjs/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@angular/platform-server": "^17.1.0",
     "@angular/router": "^17.1.0",
     "@angular/ssr": "^17.1.3",
+    "@nguniversal/express-engine": "^7.1.1",
     "express": "^4.18.2",
     "ngx-bootstrap": "^12.0.0",
     "node-sass": "^9.0.0",

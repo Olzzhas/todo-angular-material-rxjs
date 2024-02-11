@@ -1,0 +1,57 @@
+<div class="flex-col justify-center items-center h-full w-1/4 m-auto mt-5">
+  <div class="h-full w-full m-auto flex-col items-center justify-center">
+    @for (task of itemList$ | async; track task) {
+      <div class="flex items-center justify-between">
+        <div *ngIf="!task.isEditMode"  class="w-80">
+          <mat-list>
+            <mat-list-item>
+              <h3 matListItemTitle>{{task.title}}</h3>
+              <p matListItemLine>
+                <span>{{task.description}}</span>
+                <span class="demo-2 font-semibold"> -- {{task.createdAt?.substring(0, 10)}}</span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+
+        <div *ngIf="task.isEditMode"  class="w-80">
+          <form [formGroup]="form">
+            <input
+              class="w-full h-7"
+              [placeholder]="task.title"
+              formControlName="taskTitle"
+            >
+            <input
+              class="w-full h-7"
+              [placeholder]="task.description"
+              formControlName="taskDescription"
+
+            >
+          </form>
+        </div>
+
+
+
+        <mat-checkbox *ngIf="!task.isChecked" (click)="toCheck(task.title)" class="example-margin"></mat-checkbox>
+        <mat-checkbox *ngIf="task.isChecked" checked (click)="toCheck(task.title)" class="example-margin"></mat-checkbox>
+
+        <button *ngIf="!task.isEditMode" (click)="toEdit(task)" mat-icon-button aria-label="Example icon button with a menu icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button *ngIf="task.isEditMode" (click)="toEdit(task); updateTask(task.title, task.description)" mat-icon-button aria-label="Example icon button with a menu icon">
+          <mat-icon>save</mat-icon>
+        </button>
+
+        <button (click)="deleteTask(task.title)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+
+
+
+      </div>
+    }
+  </div>
+</div>
+
